@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TabTest < ActiveSupport::TestCase
   def setup
-	@user = User.create(username: "Taylor", oracle_id: 1234567)
+	@user = User.create(username: "Taylor", employee_id: 1234567)
   	@tab = Tab.new(name: "Test Tab", tab_type: "MM")
   end
 

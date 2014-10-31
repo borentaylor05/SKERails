@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DocTest < ActiveSupport::TestCase
   def setup
-	@user = User.create(username: "Taylor", oracle_id: 1234567)
+	@user = User.create(username: "Taylor", employee_id: 1234567)
   	@doc = Doc.new(title: "Test Title", doc_num: "DOC-0000")
   end
 

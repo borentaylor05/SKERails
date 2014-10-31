@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CallTest < ActiveSupport::TestCase
   def setup
-  	@user = User.create(username: "Taylor", oracle_id: 1234567)
+  	@user = User.create(username: "Taylor", employee_id: 1234567, jive_user_id: 1)
 
   end
 
@@ -15,5 +15,5 @@ class CallTest < ActiveSupport::TestCase
   	call = Call.new(start_time: Time.now, end_time: Time.now, user_id: @user.id)
   	assert call.valid?, "#{call.inspect} should be valid"
   end
-  
+
 end

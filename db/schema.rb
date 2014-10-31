@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031200739) do
+ActiveRecord::Schema.define(version: 20141031220840) do
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -66,10 +66,11 @@ ActiveRecord::Schema.define(version: 20141031200739) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "oracle_id"
     t.string   "username"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "jive_user_id"
+    t.string   "employee_id"
   end
 
 end

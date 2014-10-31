@@ -3,7 +3,7 @@ require 'test_helper'
 class ClickTest < ActiveSupport::TestCase
 
 	def setup
-		@user = User.create(username: "Taylor", oracle_id: 1234567)
+		@user = User.create(username: "Taylor", employee_id: 1234567)
 		@click = Click.new(user_id: @user.id)
 	end
   

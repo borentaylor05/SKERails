@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SearchTest < ActiveSupport::TestCase
   def setup
-	@user = User.create(username: "Taylor", oracle_id: 1234567)
+	@user = User.create(username: "Taylor", employee_id: 1234567)
   	@search = Search.new(subject: "Test Subject")
   end
 

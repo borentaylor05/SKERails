@@ -10,7 +10,7 @@ class TabController < ApplicationController
 	def create
 		if params_present?
 			Rails.logger.info(params);
-			user = User.find_by(oracle_id: params[:user_id])
+			user = User.find_by(employee_id: params[:user_id])
 			tab = Tab.new(name: params[:name], tab_type: params[:tab_type])
 			click = Click.new(user_id: user.id, action: tab)
 			tab.click = click

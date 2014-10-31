@@ -4,8 +4,8 @@ def setup
 	@host = "http://localhost:3000"
 end
 
-test "posting to tab" do 
-	post_via_redirect("#{setup}/calls", {start_time: Time.now, end_time: Time.now+10*60})
+test "posting to call" do 
+	post_via_redirect("#{setup}/calls", { employee_id: 1234567, jive_user_id: 1, username: "TEST" })
 	assert_response :success
 end	
 
