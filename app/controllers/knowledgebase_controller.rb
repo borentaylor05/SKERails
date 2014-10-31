@@ -1,4 +1,4 @@
-class MegamenuController < ApplicationController
+class KnowledgebaseController < ApplicationController
 
 	# Line below avoids need for csrf token verification.  Leaving this out will
 	# cause the Rails app to reject any POST request from external sites
@@ -10,4 +10,5 @@ class MegamenuController < ApplicationController
 			format.json {render json: params}
 		end
 	end
+
 end
