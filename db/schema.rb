@@ -11,7 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028214130) do
+ActiveRecord::Schema.define(version: 20141031050431) do
+
+  create_table "clicks", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "action_type"
+    t.integer  "action_id"
+  end
+
+  add_index "clicks", ["action_id", "action_type"], name: "index_clicks_on_action_id_and_action_type"
+
+  create_table "docs", force: true do |t|
+    t.string   "title"
+    t.string   "doc_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "documents", force: true do |t|
+    t.string   "title"
+    t.string   "doc_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "labels", force: true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "searches", force: true do |t|
+    t.string   "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tabs", force: true do |t|
+    t.string   "name"
+    t.string   "tab_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: true do |t|
     t.string   "oracle_id"
