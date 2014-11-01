@@ -17,12 +17,11 @@ class CallController < ApplicationController
 		# if post-call form is submitted within that time, end_time will be replaced
 		current_call = Call.create(user_id: @user.id, start_time: Time.now, end_time: Time.now+420)  
 		Rails.logger.info(current_call)
-		if(cookies[:current_call].present?) # end previous call
-			Call.find(cookies[:current_call]).end_time = Time.now
-			cookies.delete :current_call
+		if(params[:call_id].to_i > 0) # end previous call
+			Call.find(params[:call_id].to_i).update_attribute(:end_time, Time.now)
 		end
 		cookies[:current_call] = { :value => current_call.id, :expires => Time.now + 3600}
-		Rails.logger.info(cookies.inspect[:current_call])
+		Rails.logger.info(cookies[:current_call].inspect)
 		respond_to do |format|
 			format.html
 			format.json { render json: current_call }	
@@ -30,9 +29,9 @@ class CallController < ApplicationController
 	end
 
 	def end_call
-		Call.find(cookies[:current_call]).end_time = Time.now
-		cookies.delete :current_call
-		Rails.logger("CALL ENDED")
+		call_id = params[:call_id].to_i
+		Call.find(call_id).update_attribute(:end_time, Time.now)
+		Rails.logger.info(Call.find(call_id).inspect)
 	end
 
 end
