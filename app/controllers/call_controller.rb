@@ -13,15 +13,13 @@ class CallController < ApplicationController
 		else
 			@user = User.find_by(jive_user_id: params[:jive_user_id])
 		end
+		if(!last_call.ended) # end previous call
+			last_call.update_attributes(end_time: Time.now, ended: true)
+		end
 		# max call time set to 7 minutes
 		# if post-call form is submitted within that time, end_time will be replaced
-		current_call = Call.create(user_id: @user.id, start_time: Time.now, end_time: Time.now+420)  
+		current_call = Call.create(user_id: @user.id, start_time: Time.now, end_time: Time.now+420, ended: false)  
 		Rails.logger.info(current_call)
-		if(params[:call_id].to_i > 0) # end previous call
-			Call.find(params[:call_id].to_i).update_attribute(:end_time, Time.now)
-		end
-		cookies[:current_call] = { :value => current_call.id, :expires => Time.now + 3600}
-		Rails.logger.info(cookies[:current_call].inspect)
 		respond_to do |format|
 			format.html
 			format.json { render json: current_call }	
@@ -29,9 +27,15 @@ class CallController < ApplicationController
 	end
 
 	def end_call
-		call_id = params[:call_id].to_i
-		Call.find(call_id).update_attribute(:end_time, Time.now)
+		last_call.update_attributes(end_time: Time.now, ended: true)
 		Rails.logger.info(Call.find(call_id).inspect)
 	end
+
+
+	private
+
+		def last_call
+			User.find_by(jive_user_id: params[:jive_user_id]).calls.last
+		end
 
 end
