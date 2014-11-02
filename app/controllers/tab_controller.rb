@@ -10,9 +10,12 @@ class TabController < ApplicationController
 	def create
 		if params_present?
 			Rails.logger.info(params);
-			user = User.find_by(employee_id: params[:user_id])
+			user = User.find_by(jive_user_id: params[:jive_user_id])
+			if !user.calls.last.ended
+				call = user.calls.last
+			end
 			tab = Tab.new(name: params[:name], tab_type: params[:tab_type])
-			click = Click.new(user_id: user.id, action: tab)
+			click = Click.new(user_id: user.id, action: tab, call_id: call.id)
 			tab.click = click
 			if tab.valid?
 				tab.save
@@ -37,7 +40,7 @@ class TabController < ApplicationController
 	end
 
 	def params_present?
-		if params.has_key?(:user_id) and params.has_key?(:name) and params.has_key?(:tab_type)
+		if params.has_key?(:jive_user_id) and params.has_key?(:name) and params.has_key?(:tab_type)
 			return true
 		else
 			return false

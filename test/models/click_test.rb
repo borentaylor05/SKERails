@@ -3,8 +3,9 @@ require 'test_helper'
 class ClickTest < ActiveSupport::TestCase
 
 	def setup
-		@user = User.create(username: "Taylor", employee_id: 1234567)
-		@click = Click.new(user_id: @user.id)
+		@user = User.create(username: "Taylor", employee_id: 1234567, jive_user_id: 1)
+    @call = Call.create(user_id: @user.id, start_time: Time.now, end_time: Time.now+60, ended: false)
+    @click = Click.new(user_id: @user.id, call_id: @call.id)
 	end
   
   test "Click should not be created without action (Tab, Search or Doc)" do 

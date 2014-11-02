@@ -3,7 +3,6 @@ require 'test_helper'
 class CallTest < ActiveSupport::TestCase
   def setup
   	@user = User.create(username: "Taylor", employee_id: 1234567, jive_user_id: 1)
-
   end
 
   test "call must have user" do 

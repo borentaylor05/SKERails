@@ -3,7 +3,7 @@ require 'test_helper'
 class TabControllerTest < ActionController::TestCase
   
   def setup
-  	@user = User.create(username: "Taylor", employee_id: 1234567)
+  	@user = User.create(username: "Taylor", employee_id: 1234567, jive_user_id: 1)
   end
 
   test "@tab should be invalid without click_attributes" do

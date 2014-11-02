@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101174933) do
+ActiveRecord::Schema.define(version: 20141101200332) do
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141101174933) do
     t.datetime "updated_at",  null: false
     t.string   "action_type"
     t.integer  "action_id"
+    t.integer  "call_id"
   end
 
   add_index "clicks", ["action_id", "action_type"], name: "index_clicks_on_action_id_and_action_type"

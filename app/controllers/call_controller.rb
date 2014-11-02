@@ -7,8 +7,7 @@ class CallController < ApplicationController
 
 	def create
 		if !User.exists?(jive_user_id: params[:jive_user_id])
-			Rails.logger.info("CREATING USER")
-			# create users on the fly
+			# create users on the fly if they don't exist
 			@user = User.create(employee_id: params[:employee_id], jive_user_id: params[:jive_user_id], username: params[:username])
 		else
 			@user = User.find_by(jive_user_id: params[:jive_user_id])
