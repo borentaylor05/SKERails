@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101200332) do
+ActiveRecord::Schema.define(version: 20141102184212) do
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141101200332) do
     t.string   "doc_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "tab_click"
   end
 
   create_table "documents", force: true do |t|

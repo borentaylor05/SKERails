@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   match 'tabs', to: "tab#create", via: :post
 
+  match 'docs', to: "doc#create", via: :post
+
+  match 'searches', to: "search#create", via: :post
+
   match 'calls', to: "call#create", via: :post
 
   match 'end-call', to: "call#end_call", via: :post
