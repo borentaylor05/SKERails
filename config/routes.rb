@@ -12,6 +12,14 @@ Rails.application.routes.draw do
 
   match 'end-call', to: "call#end_call", via: :post
 
+  # DATA ROUTES
+
+  match 'clicks-per-call', to: "data#clicks_per_call", via: :get
+
+  # APP ROUTES
+
+  match 'apps/get-structure', to: "content#get_structure", via: :get
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

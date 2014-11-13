@@ -13,4 +13,7 @@ Data to collect:
  - Avg. MM tabs / docs clicked per call
  - Avg Search per call
  - Total Docs accessed (Search and Docs) and per call
+ - Compare agents performance over X amount of time
+ - The post-call form can be used to build a more accurate search
+ - This data alongside empower should give fantastic insights
  

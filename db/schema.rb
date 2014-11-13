@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141102184212) do
+ActiveRecord::Schema.define(version: 20141113013139) do
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -32,6 +32,23 @@ ActiveRecord::Schema.define(version: 20141102184212) do
   end
 
   add_index "clicks", ["action_id", "action_type"], name: "index_clicks_on_action_id_and_action_type"
+
+  create_table "clients", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contents", force: true do |t|
+    t.string   "name"
+    t.string   "link"
+    t.integer  "subtopic_id"
+    t.boolean  "native"
+    t.string   "original_doc"
+    t.string   "summary"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "docs", force: true do |t|
     t.string   "title"
@@ -55,10 +72,30 @@ ActiveRecord::Schema.define(version: 20141102184212) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "primary_topics", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "searches", force: true do |t|
     t.string   "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "secondary_topics", force: true do |t|
+    t.string   "name"
+    t.integer  "primary_topic_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "subtopics", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "secondary_topic_id"
   end
 
   create_table "tabs", force: true do |t|
@@ -74,6 +111,7 @@ ActiveRecord::Schema.define(version: 20141102184212) do
     t.datetime "updated_at",   null: false
     t.string   "jive_user_id"
     t.string   "employee_id"
+    t.integer  "client_id"
   end
 
 end

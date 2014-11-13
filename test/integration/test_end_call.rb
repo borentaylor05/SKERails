@@ -5,7 +5,7 @@ def setup
 end
 
 test "posting to tab" do 
-	get_via_redirect("#{setup}/end-call")
+	post_via_redirect("#{setup}/end-call", { jive_user_id: 1 })
 	assert_response :success
 end	
 
