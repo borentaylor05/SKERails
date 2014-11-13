@@ -18,7 +18,11 @@ Rails.application.routes.draw do
 
   # APP ROUTES
 
-  match 'apps/get-structure', to: "content#get_structure", via: :get
+  match 'apps/wwc/get-structure', to: "content#get_structure", via: :get
+
+  match 'apps/wwc/doc-dropdown', to: "content#get_doc_dropdown", via: :get
+
+  match 'apps/wwc/content/new', to: "content#new_content", via: :post
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
