@@ -57,21 +57,16 @@ class ContentController < ApplicationController
 		def get_struct(sec)
 			subtopics = []
 			sub = {}
-			cur = 99999
 			Subtopic.where(secondary_topic_id: sec).each do |s|
+				sub = {  name: s.name, docs: [] }
 				Content.where(subtopic_id: s.id).each do |c|
 					doc = { name: c.name, link: c.link, native: c.native, original_doc: c.original_doc, summary: c.summary }
-					if cur != s.id
-						if !sub.blank?
-							subtopics.push(sub)
-						end
-						sub = {  name: s.name, docs: [] }
-					end
 					sub[:docs].push(doc)
 				end
-				cur = s.id
+				if !sub.blank? and !sub[:docs].blank?
+					subtopics.push(sub)
+				end
 			end
-			subtopics.push(sub)
 			return subtopics
 		end
 end
