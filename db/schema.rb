@@ -58,20 +58,6 @@ ActiveRecord::Schema.define(version: 20141113013139) do
     t.boolean  "tab_click"
   end
 
-  create_table "documents", force: true do |t|
-    t.string   "title"
-    t.string   "doc_num"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "labels", force: true do |t|
-    t.string   "name"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "primary_topics", force: true do |t|
     t.string   "name"
     t.datetime "created_at", null: false
