@@ -57,9 +57,9 @@ class ContentController < ApplicationController
 		def get_struct(sec)
 			subtopics = []
 			sub = {}
-			Subtopic.where(secondary_topic_id: sec).each do |s|
+			Subtopic.where(secondary_topic_id: sec).order(id: :asc).each do |s|
 				sub = {  name: s.name, docs: [] }
-				Content.where(subtopic_id: s.id).each do |c|
+				Content.where(subtopic_id: s.id).order(id: :asc).each do |c|
 					doc = { name: c.name, link: c.link, native: c.native, original_doc: c.original_doc, summary: c.summary }
 					sub[:docs].push(doc)
 				end
