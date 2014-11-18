@@ -6,6 +6,18 @@ class ContentController < ApplicationController
 	skip_before_action :verify_authenticity_token  
 
 
+	def get_wwc_content
+		contents = Hash[]
+		Content.all.each do |c|
+			parts = c.link.split("?")[0].split("/")
+			doc = parts[parts.length - 1]
+			contents[c.name] = doc
+		end
+		respond_to do |format|
+			format.any(:json, :html) { render json: contents }
+		end
+	end
+	
 	def get_structure
 		respond_to do |format|
 			format.html

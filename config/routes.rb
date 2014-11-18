@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   match 'apps/wwc/content/new', to: "content#new_content", via: :post
 
+  match 'apps/wwc/contents', to: "content#get_wwc_content", via: :get
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
