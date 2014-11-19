@@ -19,17 +19,13 @@ class ContentController < ApplicationController
 	end
 
 	def show
-		Rails.logger.info(params)
 		if params.has_key?(:doc)
 			doc = Content.find_by(doc_num: params[:doc])
-			Rails.logger.info("HERE")
 		else
-			Rails.logger.info("HERE2")
 			doc = Content.find(params[:id])
 		end
-		Rails.logger.info("HERE3")
 		if !doc.blank?
-			parents = "#{doc.subtopic.secondary_topic.primary_topic.name} -> #{doc.subtopic.secondary_topic.name} -> #{doc.subtopic.name}"
+			parents = "#{doc.subtopic.secondary_topic.primary_topic.name} > #{doc.subtopic.secondary_topic.name} > #{doc.subtopic.name}"
 			doc = to_hash(doc)
 			doc['parent'] = parents
 		else
