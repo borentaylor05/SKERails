@@ -17,6 +17,22 @@ class ContentController < ApplicationController
 			format.any(:json, :html) { render json: contents }
 		end
 	end
+
+	def show
+		if params.has_key?(:doc)
+			doc = Content.find_by(link: params[:doc])
+		else
+			doc = Content.find(params[:id])
+		end
+		if !doc.blank?
+			parents = "#{doc.subtopic.secondary_topic.primary_topic.name} -> #{doc.subtopic.secondary_topic.name} -> #{doc.subtopic.name}"
+			doc = to_hash(doc)
+			doc['parent'] = parents
+		end
+		respond_to do |format|
+			format.any(:json, :html) { render json: doc }
+		end
+	end
 	
 	def get_structure
 		respond_to do |format|
@@ -80,5 +96,12 @@ class ContentController < ApplicationController
 				end
 			end
 			return subtopics
+		end
+
+
+		def to_hash(content)
+		    hash = {}; 
+		    content.attributes.each { |k,v| hash[k] = v }
+		    return hash
 		end
 end
