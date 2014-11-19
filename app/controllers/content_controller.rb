@@ -19,8 +19,9 @@ class ContentController < ApplicationController
 	end
 
 	def show
+		Rails.logger.inf(params)
 		if params.has_key?(:doc)
-			doc = Content.find_by(link: params[:doc])
+			doc = Content.find_by(doc_num: params[:doc])
 		else
 			doc = Content.find(params[:id])
 		end
@@ -28,6 +29,8 @@ class ContentController < ApplicationController
 			parents = "#{doc.subtopic.secondary_topic.primary_topic.name} -> #{doc.subtopic.secondary_topic.name} -> #{doc.subtopic.name}"
 			doc = to_hash(doc)
 			doc['parent'] = parents
+		else
+			Rails.logger.info("Doc is blank!!!")
 		end
 		respond_to do |format|
 			format.any(:json, :html) { render json: doc }

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   match 'apps/wwc/contents', to: "content#get_wwc_content", via: :get
 
-  match 'contents/:id', to: "content#show", via: :get
+#  match 'contents/:id', to: "content#show", via: :get
 
   match 'contents/docs', to: "content#show", via: :get
 
