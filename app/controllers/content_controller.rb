@@ -21,6 +21,7 @@ class ContentController < ApplicationController
 	def wwc_add_to_favorites
 		if !params.has_key?(:jive_user_id) or !params.has_key?(:doc_num) 
 			return "Must contain Jive ID and Document number"
+		end
 		if User.find_by(jive_user_id: params[:jive_user_id]).blank?
 			user = User.new(jive_user_id: params[:jive_user_id], client_id: params[:client_id])
 			if user.valid?
@@ -31,7 +32,7 @@ class ContentController < ApplicationController
 		else
 			user = User.find_by(jive_user_id: params[:jive_user_id])
 		end
-		
+
 
 	end
 
