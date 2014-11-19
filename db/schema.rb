@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119203205) do
+ActiveRecord::Schema.define(version: 20141119213905) do
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -109,5 +109,7 @@ ActiveRecord::Schema.define(version: 20141119203205) do
     t.string   "jive_user_id"
     t.integer  "client_id"
   end
+
+  add_index "users", ["jive_user_id"], name: "index_users_on_jive_user_id"
 
 end
