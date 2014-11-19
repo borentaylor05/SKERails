@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119183537) do
+ActiveRecord::Schema.define(version: 20141119203205) do
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 20141119183537) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "tab_click"
+  end
+
+  create_table "favorites", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "content_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "primary_topics", force: true do |t|
