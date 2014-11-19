@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119161051) do
+ActiveRecord::Schema.define(version: 20141119165002) do
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -48,8 +48,10 @@ ActiveRecord::Schema.define(version: 20141119161051) do
     t.string   "summary"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "doc_num"
   end
 
+  add_index "contents", ["doc_num"], name: "index_contents_on_doc_num"
   add_index "contents", ["link"], name: "index_contents_on_link"
 
   create_table "docs", force: true do |t|
