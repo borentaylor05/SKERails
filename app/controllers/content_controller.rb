@@ -55,6 +55,7 @@ class ContentController < ApplicationController
 	end
 	
 	def get_structure
+		::NewRelic::Agent.add_custom_parameters({ secondary_topic: SecondaryTopic.find(params[:secondary]).name })
 		respond_to do |format|
 			format.html
 			format.json { render json: get_struct(params[:secondary]) }
