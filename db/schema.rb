@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119213905) do
+ActiveRecord::Schema.define(version: 20141122202437) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "calls", force: true do |t|
     t.datetime "start_time"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20141119213905) do
     t.integer  "call_id"
   end
 
-  add_index "clicks", ["action_id", "action_type"], name: "index_clicks_on_action_id_and_action_type"
+  add_index "clicks", ["action_id", "action_type"], name: "index_clicks_on_action_id_and_action_type", using: :btree
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -39,6 +42,8 @@ ActiveRecord::Schema.define(version: 20141119213905) do
     t.datetime "updated_at", null: false
     t.string   "host"
   end
+
+  add_index "clients", ["host"], name: "index_clients_on_host", using: :btree
 
   create_table "contents", force: true do |t|
     t.string   "name"
@@ -52,8 +57,8 @@ ActiveRecord::Schema.define(version: 20141119213905) do
     t.string   "doc_num"
   end
 
-  add_index "contents", ["doc_num"], name: "index_contents_on_doc_num"
-  add_index "contents", ["link"], name: "index_contents_on_link"
+  add_index "contents", ["doc_num"], name: "index_contents_on_doc_num", using: :btree
+  add_index "contents", ["link"], name: "index_contents_on_link", using: :btree
 
   create_table "docs", force: true do |t|
     t.string   "title"
@@ -108,8 +113,9 @@ ActiveRecord::Schema.define(version: 20141119213905) do
     t.datetime "updated_at",   null: false
     t.string   "jive_user_id"
     t.integer  "client_id"
+    t.string   "employee_id"
   end
 
-  add_index "users", ["jive_user_id"], name: "index_users_on_jive_user_id"
+  add_index "users", ["jive_user_id"], name: "index_users_on_jive_user_id", using: :btree
 
 end

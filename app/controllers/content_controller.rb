@@ -3,7 +3,7 @@ class ContentController < ApplicationController
 	# Line below avoids need for csrf token verification.  Leaving this out will
 	# cause the Rails app to reject any POST request from external sites
 	# with Error: 422, Unprocessable_Entity
-	skip_before_action :verify_authenticity_token  
+	#skip_before_action :verify_authenticity_token  
 
 
 	def get_wwc_content
@@ -15,6 +15,24 @@ class ContentController < ApplicationController
 		end
 		respond_to do |format|
 			format.any(:json, :html) { render json: contents }
+		end
+	end
+
+	def new_user
+		if User.find_by(jive_user_id: params[:jive_user_id]).blank?
+			host = "#{request.protocol}#{request.host}"
+			client = Client.find_by(host: host)
+			user = User.new(jive_user_id: params[:jive_user_id], employee_id: params[:employee_id], client_id: client.id)
+			if user.valid?
+				user.save
+			else
+				Rails.logger.info(user.errors.full_messages)
+			end
+		else
+			user = User.find_by(jive_user_id: params[:jive_user_id])
+		end
+		respond_to do |format|
+			format.any(:json, :html) { render json: user }
 		end
 	end
 
@@ -57,8 +75,9 @@ class ContentController < ApplicationController
 	def get_structure
 		NewRelic::Agent.add_custom_parameters({ 
 			secondary_topic: SecondaryTopic.find(params[:secondary]).name,
-			primary_topic: SecondaryTopic.find(params[:secondary]).primary_topic.name
-			})
+			primary_topic: SecondaryTopic.find(params[:secondary]).primary_topic.name,
+			jive_user_id: params[:jive_user_id]
+		})
 		respond_to do |format|
 			format.html
 			format.json { render json: get_struct(params[:secondary]) }
