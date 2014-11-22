@@ -57,7 +57,7 @@ class ContentController < ApplicationController
 	def get_structure
 		NewRelic::Agent.add_custom_parameters({ 
 			secondary_topic: SecondaryTopic.find(params[:secondary]).name,
-			primary_topic: SecondaryTopic.find(params[:secondary]).primary_topic
+			primary_topic: SecondaryTopic.find(params[:secondary]).primary_topic.name
 			})
 		respond_to do |format|
 			format.html
