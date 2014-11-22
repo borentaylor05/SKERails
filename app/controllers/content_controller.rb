@@ -74,7 +74,7 @@ class ContentController < ApplicationController
 	
 	def get_structure
 		user = User.find_by(jive_user_id: params[:jive_user_id])
-		if !user.employee_id.blank?
+		if user and !user.employee_id.blank?
 			NewRelic::Agent.add_custom_parameters({ 
 				secondary_topic: SecondaryTopic.find(params[:secondary]).name,
 				primary_topic: SecondaryTopic.find(params[:secondary]).primary_topic.name,
