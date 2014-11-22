@@ -21,6 +21,7 @@ class ContentController < ApplicationController
 	def new_user
 		if User.find_by(jive_user_id: params[:jive_user_id]).blank?
 			host = "#{request.protocol}#{request.host}"
+			Rails.logger.info(host)
 			client = Client.find_by(host: host)
 			user = User.new(jive_user_id: params[:jive_user_id], employee_id: params[:employee_id], client_id: client.id)
 			if user.valid?
