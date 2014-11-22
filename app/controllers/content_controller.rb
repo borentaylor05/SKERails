@@ -73,10 +73,11 @@ class ContentController < ApplicationController
 	end
 	
 	def get_structure
+		user = User.find_by(jive_user_id: params[:jive_user_id])
 		NewRelic::Agent.add_custom_parameters({ 
 			secondary_topic: SecondaryTopic.find(params[:secondary]).name,
 			primary_topic: SecondaryTopic.find(params[:secondary]).primary_topic.name,
-			jive_user_id: params[:jive_user_id]
+			employee: user.employee_id
 		})
 		respond_to do |format|
 			format.html
