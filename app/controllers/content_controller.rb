@@ -29,7 +29,7 @@ class ContentController < ApplicationController
 		else
 			user = User.find_by(jive_user_id: params[:jive_user_id])
 		end
-		::NewRelic::Agent.increment_metric('Custom/Content/Logins') #tracks total number of app visits 
+		::NewRelic::Agent.increment_metric('Custom/Account/Logins') #tracks total number of app visits 
 		respond_to do |format|
 			format.any(:json, :html) { render json: user }
 		end
@@ -74,7 +74,7 @@ class ContentController < ApplicationController
 	def get_structure
 		user = User.find_by(jive_user_id: params[:jive_user_id])
 		if user and !user.employee_id.blank?
-			::NewRelic::Agent.increment_metric("Custom/Content/#{SecondaryTopic.find(params[:secondary]).name}")
+			::NewRelic::Agent.increment_metric("Custom/Subtopic/#{SecondaryTopic.find(params[:secondary]).name}")
 			NewRelic::Agent.add_custom_parameters({ 
 				secondary_topic: SecondaryTopic.find(params[:secondary]).name,
 				primary_topic: SecondaryTopic.find(params[:secondary]).primary_topic.name,
