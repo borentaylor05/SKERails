@@ -29,7 +29,7 @@ class ContentController < ApplicationController
 		else
 			user = User.find_by(jive_user_id: params[:jive_user_id])
 		end
-		::NewRelic::Agent.increment_metric('Logins', amount=1) #tracks total logins 
+		::NewRelic::Agent.increment_metric('Custom/Content/Logins', amount=1) #tracks total logins 
 		respond_to do |format|
 			format.any(:json, :html) { render json: user }
 		end
