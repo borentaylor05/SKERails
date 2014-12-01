@@ -129,6 +129,7 @@ class ContentController < ApplicationController
 	private
 
 		def get_struct(sec)
+			Rails.logger.info(request.domain)
 			subtopics = []
 			sub = {}
 			Subtopic.where(secondary_topic_id: sec).order(id: :asc).each do |s|
